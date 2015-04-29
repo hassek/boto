@@ -128,7 +128,8 @@ class CertValidatingHTTPSConnection(http_client.HTTPConnection):
         self.sock = ssl.wrap_socket(sock, keyfile=self.key_file,
                                     certfile=self.cert_file,
                                     cert_reqs=ssl.CERT_REQUIRED,
-                                    ca_certs=self.ca_certs)
+                                    ca_certs=self.ca_certs,
+                                    ssl_version=ssl.PROTOCOL_TLSv1)
         cert = self.sock.getpeercert()
         hostname = self.host.split(':', 0)[0]
         if not ValidateCertificateHostname(cert, hostname):
